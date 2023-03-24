@@ -8,7 +8,7 @@ public class GC : MonoBehaviour
 {
     public GameObject prefabPiece;
     Piece currentPiece;
-    public TextMeshProUGUI T;
+   // public TextMeshProUGUI T;
     private float score = 60;
 
     Block[,] stageBlocks = new Block[16,32];
@@ -22,8 +22,8 @@ public class GC : MonoBehaviour
 
     void Update()
     {
-        score -= Time.deltaTime;
-        T.text =  "Tiempo: " + score.ToString("f0");
+        //score -= Time.deltaTime;
+        //T.text =  "Tiempo: " + score.ToString("f0");
     }
 
     private void NewPiece()
