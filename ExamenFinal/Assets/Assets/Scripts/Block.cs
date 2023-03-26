@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     public int x { get { return (int)transform.position.x + 8; } }
-    public int y { get { return (int)transform.position.y + 16; } }
+    public int y { get { return (int)transform.position.y + 15; } }
     // Start is called before the first frame update
     void Start()
     {

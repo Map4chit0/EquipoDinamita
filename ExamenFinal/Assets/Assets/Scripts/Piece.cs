@@ -45,9 +45,10 @@ public class Piece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+       /* if (Input.GetKeyDown(KeyCode.DownArrow))
         {
            Time.timeScale = 20;
+
             
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
@@ -55,7 +56,7 @@ public class Piece : MonoBehaviour
           Time.timeScale = 1;
          
 
-        }
+        } */
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(-1, 0);

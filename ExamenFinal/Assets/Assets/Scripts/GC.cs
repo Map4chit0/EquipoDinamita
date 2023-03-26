@@ -8,8 +8,11 @@ public class GC : MonoBehaviour
 {
     public GameObject prefabPiece;
     Piece currentPiece;
-   // public TextMeshProUGUI T;
+    public TextMeshProUGUI T;
     private float score = 60;
+    private float Vel = 0;
+    private float maxTime = 1;
+    private bool canMove = true;
 
     Block[,] stageBlocks = new Block[16,32];
 
@@ -22,8 +25,51 @@ public class GC : MonoBehaviour
 
     void Update()
     {
-        //score -= Time.deltaTime;
-        //T.text =  "Tiempo: " + score.ToString("f0");
+        score -= Time.deltaTime;
+        T.text =  "Tiempo: " + score.ToString("f0");
+        Vel -= Time.deltaTime;
+
+        if(Vel <= 0)
+        {
+            Debug.Log(currentPiece.blocks.Count);
+            foreach(Block b in currentPiece.blocks)
+            {
+                //Debug.Log(b.y, b.gameObject);
+                if (b.y < 0 || stageBlocks[b.x, b.y + 1] != null)
+                {
+                    //currentPiece.Move(0, 1);
+                    //Debug.Log("bloquea");
+                    canMove = false;
+                    Down();
+                    break;
+                }
+                else
+                {
+                    canMove = true;
+                }
+            }
+
+            if (canMove){
+                currentPiece.Move(0, -1);
+            }
+
+            Vel = maxTime;
+            
+        }
+        
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            //currentPiece.Move(0, -1); 
+            if (Vel > 0.02f)
+            {
+                Vel = 0;
+            }  
+            maxTime = 0.02f ;
+        }
+        else
+        {
+            maxTime = 1;
+        }
     }
 
     private void NewPiece()
@@ -31,32 +77,19 @@ public class GC : MonoBehaviour
         currentPiece = Instantiate(prefabPiece, transform).GetComponent<Piece>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        currentPiece.Move(0, -1);
-
-        foreach(Block b in currentPiece.blocks)
-        {
-            if (b.y < 0 || stageBlocks[b.x, b.y] != null)
-            {
-                currentPiece.Move(0, 1);
-                Down();
-                break;
-            }
-        }
-    }
 
     private void Down()
     {
         foreach (Block b in currentPiece.blocks)
         {
-            stageBlocks[b.x, b.y] = b;
+           // Debug.Log(b.x + ", " + b.y, b.gameObject);
+            stageBlocks[b.x, b.y + 1] = b;
         }
 
         IsLine();
 
         currentPiece.enabled = false;
+        currentPiece = null;
         NewPiece();
 
     }
@@ -86,14 +119,14 @@ public class GC : MonoBehaviour
 
     private void RemoveLine(int py)
     {
-        for (int x = 0; x < 16; x++)
+        for (int x = 0; x < 17; x++)
         {
             DestroyImmediate(stageBlocks[x, py].gameObject);//TODO: Fixed!
         }
 
         for (int y = py + 1; y < 32; y++)
         {
-            for (int x = 0; x < 16; x++)
+            for (int x = 0; x < 17; x++)
             {
                 Block b = stageBlocks[x, y];
                 if (b!= null)
@@ -113,6 +146,16 @@ public class GC : MonoBehaviour
             for (int y = 0; y < 32; y++)
             {
                 Gizmos.DrawWireCube(new Vector2(x - 8, y - 16), Vector3.one);
+            }
+        }
+    }
+    private void GO ()
+    {
+            foreach (Block b in currentPiece.blocks)
+        {
+            if (b.y > 2 )
+            {
+                Debug.Log("Perdiste");
             }
         }
     }
