@@ -27,15 +27,15 @@ public class GC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NewPiece();
-        textoPuntaje.text = "Score: " + puntaje;
+        NewPiece(); //ejecuta función NewPiece
+        textoPuntaje.text = "Score: " + puntaje; //para puntahe
     }
 
     void Update()
     {
        // score -= Time.deltaTime;
        // T.text =  "Tiempo: " + score.ToString("f0");
-        Vel -= Time.deltaTime;
+        Vel -= Time.deltaTime; //velocidad.
 
         if(Vel <= 0)
         {
