@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assets/Scenes/Menu.unity
     guid: 8af8214f50957f143957d2eca673b7c7
+  - enabled: 1
+    path: Assets/Assets/Scenes/ContraReloj.unity
+    guid: fef70cae476d12546af817f8596fce6d
+  - enabled: 1
+    path: Assets/Assets/Scenes/GameOver.unity
+    guid: a421b6de5a764954bbcc202f527c77b1
   m_configObjects: {}

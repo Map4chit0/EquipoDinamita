@@ -23,5 +23,15 @@ public class cambioEscena : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ContraReloj ()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Menu ()
+    {
+        SceneManager.LoadScene(1);
+    }
+
 
 }
