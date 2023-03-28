@@ -8,10 +8,10 @@ public class GC : MonoBehaviour
 {
     public GameObject prefabPiece;
     Piece currentPiece;
-    public TextMeshProUGUI T;
+   // public TextMeshProUGUI T;
 
     
-    private float score = 60;
+    //private float score = 60;
     private float Vel = 0;
     private float maxTime = 1;
     private bool canMove = true;
@@ -33,8 +33,8 @@ public class GC : MonoBehaviour
 
     void Update()
     {
-        score -= Time.deltaTime;
-        T.text =  "Tiempo: " + score.ToString("f0");
+       // score -= Time.deltaTime;
+       // T.text =  "Tiempo: " + score.ToString("f0");
         Vel -= Time.deltaTime;
 
         if(Vel <= 0)
@@ -45,8 +45,8 @@ public class GC : MonoBehaviour
                 //Debug.Log(b.y, b.gameObject);
                 if (b.y < 0 || stageBlocks[b.x, b.y + 1] != null)
                 {
-                    //currentPiece.Move(0, 1);
-                    //Debug.Log("bloquea");
+                    currentPiece.Move(0, 1);
+                    Debug.Log("bloquea");
                     canMove = false;
                     Down();
                     break;
@@ -119,7 +119,7 @@ public class GC : MonoBehaviour
             {
                 RemoveLine(y);
                 y--;
-                score = score + 30;
+                //score = score + 30;
                 //puntaje
                 puntaje = puntaje + 100;
                 textoPuntaje.text = "Score: " + puntaje;
@@ -130,14 +130,14 @@ public class GC : MonoBehaviour
 
     private void RemoveLine(int py)
     {
-        for (int x = 0; x < 17; x++)
+        for (int x = 0; x < 16; x++)
         {
             DestroyImmediate(stageBlocks[x, py].gameObject);//TODO: Fixed!
         }
 
         for (int y = py + 1; y < 32; y++)
         {
-            for (int x = 0; x < 17; x++)
+            for (int x = 0; x < 16; x++)
             {
                 Block b = stageBlocks[x, y];
                 if (b!= null)
@@ -160,7 +160,7 @@ public class GC : MonoBehaviour
             }
         }
     }
-    private void GO ()
+   /* private void GO ()
     {
             foreach (Block b in currentPiece.blocks)
         {
@@ -169,5 +169,5 @@ public class GC : MonoBehaviour
                 Debug.Log("Perdiste");
             }
         }
-    }
+    }*/
 }
