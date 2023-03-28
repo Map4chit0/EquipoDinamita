@@ -9,6 +9,8 @@ public class GC : MonoBehaviour
     public GameObject prefabPiece;
     Piece currentPiece;
     public TextMeshProUGUI T;
+
+    
     private float score = 60;
     private float Vel = 0;
     private float maxTime = 1;
@@ -16,11 +18,17 @@ public class GC : MonoBehaviour
 
     Block[,] stageBlocks = new Block[16,32];
 
+
+//para puntaje:
+    [SerializeField] private TMP_Text textoPuntaje;
+    private int puntaje= 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
         NewPiece();
-        
+        textoPuntaje.text = "Score: " + puntaje;
     }
 
     void Update()
@@ -112,6 +120,9 @@ public class GC : MonoBehaviour
                 RemoveLine(y);
                 y--;
                 score = score + 30;
+                //puntaje
+                puntaje = puntaje + 100;
+                textoPuntaje.text = "Score: " + puntaje;
             }
 
         }
