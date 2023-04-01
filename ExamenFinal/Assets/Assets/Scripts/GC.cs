@@ -39,11 +39,11 @@ public class GC : MonoBehaviour
 
         if(Vel <= 0)
         {
-            Debug.Log(currentPiece.blocks.Count);
+            //Debug.Log(currentPiece.blocks.Count);
             foreach(Block b in currentPiece.blocks)
             {
                 //Debug.Log(b.y, b.gameObject);
-                if (b.y < 0 || stageBlocks[b.x, b.y + 1] != null)
+                if (b.y < 0 || stageBlocks[b.x, b.y] != null)
                 {
                     currentPiece.Move(0, 1);
                     Debug.Log("bloquea");
@@ -91,7 +91,7 @@ public class GC : MonoBehaviour
         foreach (Block b in currentPiece.blocks)
         {
            // Debug.Log(b.x + ", " + b.y, b.gameObject);
-            stageBlocks[b.x, b.y + 1] = b;
+            stageBlocks[b.x, b.y] = b;
         }
 
         IsLine();
