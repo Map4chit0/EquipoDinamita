@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameOver : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Perdiste");
+            SceneManager.LoadScene(3);
         }
     }
 }
