@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GCdos : MonoBehaviour
 {
@@ -29,12 +30,17 @@ public class GCdos : MonoBehaviour
         NewPiece(); //ejecuta función NewPiece
         textoPuntaje.text = "Score: " + puntaje; //para puntahe
         T.text = "Tiempo: " + score.ToString("f0");
+
     }
 
     void Update()
     {
          score -= Time.deltaTime;
          T.text =  "Tiempo: " + score.ToString("f0");
+        if (score <= 0)
+        {
+            SceneManager.LoadScene(4);
+        }
         Vel -= Time.deltaTime; //velocidad.
 
         if (Vel <= 0)
