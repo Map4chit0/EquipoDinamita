@@ -33,5 +33,14 @@ public class cambioEscena : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void Restart1()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Restart2()
+    {
+        SceneManager.LoadScene(2);
+    }
 
 }
