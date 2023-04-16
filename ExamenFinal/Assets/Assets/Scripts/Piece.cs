@@ -56,7 +56,7 @@ public class Piece : MonoBehaviour
           Time.timeScale = 1;
          
 
-        } */
+        } 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(-1, 0);
@@ -65,7 +65,7 @@ public class Piece : MonoBehaviour
         {
             Move(1, 0);
 
-        }
+        } */
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Trun();

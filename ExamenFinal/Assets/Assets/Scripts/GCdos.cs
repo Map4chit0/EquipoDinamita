@@ -42,26 +42,26 @@ public class GCdos : MonoBehaviour
             SceneManager.LoadScene(4);
         }
         Vel -= Time.deltaTime; //velocidad.
+        foreach (Block b in currentPiece.blocks)
+        {
+            //Debug.Log(b.y, b.gameObject);
+            if (b.y < 0 || stageBlocks[b.x, b.y] != null)
+            {
+                currentPiece.Move(0, 1);
+                Debug.Log("bloquea");
+                canMove = false;
+                Down();
+                break;
+            }
+            else
+            {
+                canMove = true;
+            }
+        }
 
         if (Vel <= 0)
         {
             //Debug.Log(currentPiece.blocks.Count);
-            foreach (Block b in currentPiece.blocks)
-            {
-                //Debug.Log(b.y, b.gameObject);
-                if (b.y < 0 || stageBlocks[b.x, b.y] != null)
-                {
-                    currentPiece.Move(0, 1);
-                    Debug.Log("bloquea");
-                    canMove = false;
-                    Down();
-                    break;
-                }
-                else
-                {
-                    canMove = true;
-                }
-            }
 
             if (canMove)
             {
@@ -69,6 +69,40 @@ public class GCdos : MonoBehaviour
             }
 
             Vel = maxTime;
+
+        }
+
+        // Check Horizontal
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentPiece.Move(-1, 0);
+            foreach (Block b in currentPiece.blocks)
+            {
+                //Debug.Log(b.y, b.gameObject);
+                if (b.y <= -5 || stageBlocks[b.x, b.y] != null)
+                {
+
+                    currentPiece.Move(1, 0);
+                    Debug.Log("bloqueo Dere");
+                }
+
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentPiece.Move(1, 0);
+            foreach (Block b in currentPiece.blocks)
+            {
+                //Debug.Log(b.y, b.gameObject);
+                if (b.y <= -5 || stageBlocks[b.x, b.y] != null)
+                {
+
+                    currentPiece.Move(-1, 0);
+                    Debug.Log("bloqueo Izq");
+
+                }
+
+            }
 
         }
 

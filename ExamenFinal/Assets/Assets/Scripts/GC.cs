@@ -37,25 +37,28 @@ public class GC : MonoBehaviour
        // T.text =  "Tiempo: " + score.ToString("f0");
         Vel -= Time.deltaTime; //velocidad.
 
-        if(Vel <= 0)
+        //Check Vertical
+
+        foreach (Block b in currentPiece.blocks)
+        {
+            //Debug.Log(b.y, b.gameObject);
+            if (b.y < 0 || stageBlocks[b.x, b.y] != null)
+            {
+                currentPiece.Move(0, 1);
+                Debug.Log("bloquea");
+                canMove = false;
+                Down();
+                break;
+            }
+            else
+            {
+                canMove = true;
+            }
+        }
+
+        if (Vel <= 0)
         {
             //Debug.Log(currentPiece.blocks.Count);
-            foreach(Block b in currentPiece.blocks)
-            {
-                //Debug.Log(b.y, b.gameObject);
-                if (b.y < 0 || stageBlocks[b.x, b.y] != null)
-                {
-                    currentPiece.Move(0, 1);
-                    Debug.Log("bloquea");
-                    canMove = false;
-                    Down();
-                    break;
-                }
-                else
-                {
-                    canMove = true;
-                }
-            }
 
             if (canMove){
                 currentPiece.Move(0, -1);
@@ -64,7 +67,41 @@ public class GC : MonoBehaviour
             Vel = maxTime;
             
         }
-        
+
+        // Check Horizontal
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentPiece.Move(-1, 0);
+            foreach (Block b in currentPiece.blocks)
+            {
+                //Debug.Log(b.y, b.gameObject);
+                if (b.y <= -5 || stageBlocks[b.x, b.y] != null)
+                {
+
+                    currentPiece.Move(1, 0);
+                    Debug.Log("bloqueo Dere");
+                }
+
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentPiece.Move(1, 0);
+            foreach (Block b in currentPiece.blocks)
+            {
+                //Debug.Log(b.y, b.gameObject);
+                if (b.y <= -5 || stageBlocks[b.x, b.y] != null)
+                {
+
+                    currentPiece.Move(-1, 0);
+                    Debug.Log("bloqueo Izq");
+
+                }
+
+            }
+
+        }
+
         if (Input.GetKey(KeyCode.DownArrow))
         {
             //currentPiece.Move(0, -1); 
