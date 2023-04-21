@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 
 public class GCdos : MonoBehaviour
@@ -23,11 +24,13 @@ public class GCdos : MonoBehaviour
     //para puntaje:
     [SerializeField] private TMP_Text textoPuntaje;
     private int puntaje = 0;
+    [SerializeField] private TextMeshProUGUI Record;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Record.text = "Max. Score: " + PlayerPrefs.GetInt("Record2", 0).ToString();
         NewPiece(); //ejecuta función NewPiece
         textoPuntaje.text = "Score: " + puntaje; //para puntahe
         T.text = "Tiempo: " + score.ToString("f0");
@@ -37,8 +40,14 @@ public class GCdos : MonoBehaviour
     void Update()
     {
          score -= Time.deltaTime;
+        if (puntaje > PlayerPrefs.GetInt("Record2", 0))
+        {
+            PlayerPrefs
+            .SetInt("Record2", puntaje);
+            Record.text = "Nuevo Max. Score: " + puntaje.ToString();
+        }
 
-        if(minut >= 1 && score <= 0)
+        if (minut >= 1 && score <= 0)
         {
             score += 59;
             minut -= 1;

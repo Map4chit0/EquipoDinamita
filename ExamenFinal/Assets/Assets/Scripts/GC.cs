@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GC : MonoBehaviour
 {
@@ -22,21 +23,27 @@ public class GC : MonoBehaviour
 //para puntaje:
     [SerializeField] private TMP_Text textoPuntaje;
     private int puntaje= 0;
-
+    [SerializeField] private TextMeshProUGUI Record;
 
     // Start is called before the first frame update
     void Start()
     {
+        Record.text = "Max. Score: " + PlayerPrefs.GetInt("Record", 0).ToString();
         NewPiece(); //ejecuta función NewPiece
         textoPuntaje.text = "Score: " + puntaje; //para puntahe
     }
 
     void Update()
     {
-       // score -= Time.deltaTime;
-       // T.text =  "Tiempo: " + score.ToString("f0");
+        // score -= Time.deltaTime;
+        // T.text =  "Tiempo: " + score.ToString("f0");
         Vel -= Time.deltaTime; //velocidad.
-
+        if (puntaje > PlayerPrefs.GetInt("Record", 0))
+        {
+            PlayerPrefs
+            .SetInt("Record", puntaje);
+            Record.text = "Nuevo Max. Score: " + puntaje.ToString();
+        }
         //Check Vertical
 
         foreach (Block b in currentPiece.blocks)
@@ -197,14 +204,14 @@ public class GC : MonoBehaviour
             }
         }
     }
-   /* private void GO ()
-    {
-            foreach (Block b in currentPiece.blocks)
-        {
-            if (b.y > 2 )
-            {
-                Debug.Log("Perdiste");
-            }
-        }
-    }*/
+    /* private void GO ()
+     {
+             foreach (Block b in currentPiece.blocks)
+         {
+             if (b.y > 2 )
+             {
+                 Debug.Log("Perdiste");
+             }
+         }
+     }*/
 }
