@@ -5,7 +5,8 @@ using TMPro;
 public class Contador : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
-    protected float timer = 0;
+    protected float timer = 00;
+    float minu = 00;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,11 @@ public class Contador : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        text.text= "Time: "+ timer.ToString("f0");
+        if (timer >= 59)
+        {
+            timer = 0;
+            minu += 01;
+        }
+        text.text= "Time: " + minu.ToString("f0") + " : "+ timer.ToString("f0");
     }
 }

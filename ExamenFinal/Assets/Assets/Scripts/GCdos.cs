@@ -11,7 +11,8 @@ public class GCdos : MonoBehaviour
     public TextMeshProUGUI T;
 
 
-    private float score = 60;
+    private float score = 10;
+    float minut = 1;
     private float Vel = 0;
     private float maxTime = 1;
     private bool canMove = true;
@@ -36,8 +37,19 @@ public class GCdos : MonoBehaviour
     void Update()
     {
          score -= Time.deltaTime;
-         T.text =  "Tiempo: " + score.ToString("f0");
-        if (score <= 0)
+
+        if(minut >= 1 && score <= 0)
+        {
+            score += 59;
+            minut -= 1;
+        }
+        if(score >= 60)
+        {
+            minut += 1;
+            score -= 59;
+        }
+         T.text =  "Tiempo: " + minut.ToString("f0") + " : " + score.ToString("f0");
+        if (minut <= 0 && score <= 0)
         {
             SceneManager.LoadScene(4);
         }
@@ -160,7 +172,7 @@ public class GCdos : MonoBehaviour
             {
                 RemoveLine(y);
                 y--;
-                score = score + 30;
+                score += 10;
                 //puntaje
                 puntaje = puntaje + 100;
                 textoPuntaje.text = "Score: " + puntaje;
